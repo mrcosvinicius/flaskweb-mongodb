@@ -53,3 +53,11 @@ class ClienteDBModel(Cliente):
         if self.id:
             data["_id"] = str(data["_id"])
         return data
+
+
+class AtualizaCliente(BaseModel):
+    nome: Optional[str] = None
+    email: Optional[str] = None
+    telefone: Optional[str] = None
+    endereco: Optional[str] = None
+    saldo: Optional[float] = None
