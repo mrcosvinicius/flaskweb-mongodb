@@ -47,7 +47,8 @@ def login():
 
 # rf: o sistema deve permitir listagem de todos os clientes
 @main_bp.route("/clientes", methods=["GET"])
-def listar_clientes():
+@token_obrigatorio
+def listar_clientes(token_usuario):
     todos_clientes = db.clientes.find({})
     clientes_list = [
         ClienteDBModel(**cliente).model_dump(by_alias=True, exclude_none=True)
@@ -63,7 +64,8 @@ def listar_clientes():
 
 # rf: o sistema deve permitir a visualizacao dos detalhes de um unico cliente
 @main_bp.route("/clientes/<string:cliente_id>", methods=["GET"])
-def visualizar_cliente(cliente_id):
+@token_obrigatorio
+def visualizar_cliente(token_usuario, cliente_id):
     try:
         uid = ObjectId(cliente_id)
     except Exception as e:
@@ -82,7 +84,7 @@ def visualizar_cliente(cliente_id):
 # rf: o sistema deve permitir a criacao de um novo cliente
 @main_bp.route("/clientes", methods=["POST"])
 @token_obrigatorio
-def criar_cliente(token_dados):
+def criar_cliente(token_usuario):
     try:
         cliente = Cliente(**request.get_json())
     except ValidationError as e:
@@ -100,7 +102,7 @@ def criar_cliente(token_dados):
 # rf: o sistema deve permitir a atualizacao de um unico cliente e cliente existente
 @main_bp.route("/clientes/<string:cliente_id>", methods=["PUT"])
 @token_obrigatorio
-def atualizar_cliente(token_dados, cliente_id):
+def atualizar_cliente(token_usuario, cliente_id):
     try:
         uid = ObjectId(cliente_id)
         dados_atualizado = AtualizaCliente(**request.get_json())
@@ -130,7 +132,7 @@ def atualizar_cliente(token_dados, cliente_id):
 # rf: o sistema deve permitir a delecao de um unico cliente e cliente existente
 @main_bp.route("/clientes/<string:cliente_id>", methods=["DELETE"])
 @token_obrigatorio
-def deletar_cliente(token_dados, cliente_id):
+def deletar_cliente(token_usuario, cliente_id):
     try:
         uid = ObjectId(cliente_id)
         produto_deletado = db.clientes.delete_one({"_id": uid})
