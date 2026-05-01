@@ -144,12 +144,6 @@ def deletar_cliente(token_dados, cliente_id):
     return jsonify({"message": f"Cliente {cliente_id} deletado com sucesso!"}), 204
 
 
-# rf: o sistema deve permitir a importacao de compras através de um arquivo
-@main_bp.route("/importar-compras", methods=["POST"])
-def importar_compras():
-    return jsonify({"message": "Rota para importar compras através de um arquivo"})
-
-
 @main_bp.route("/", methods=["GET"])
 def pagina_inicial():
     return jsonify({"message": "Bem-vindo à API de Clientes!"})
