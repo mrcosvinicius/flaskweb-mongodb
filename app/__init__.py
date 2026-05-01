@@ -17,6 +17,9 @@ def create_app():
         print(f"Erro na conexão com o banco de dados: {e}")
 
     from .routes.main import main_bp
+    from .routes.usuario_routes import usuarios_bp
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(usuarios_bp)
+
     return app
