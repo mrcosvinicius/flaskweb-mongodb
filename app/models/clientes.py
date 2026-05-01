@@ -50,7 +50,7 @@ class ClienteDBModel(Cliente):
             serialize_as_any=serialize_as_any,
             polymorphic_serialization=polymorphic_serialization,
         )
-        if self.id:
+        if "_id" in data:
             data["_id"] = str(data["_id"])
         return data
 
