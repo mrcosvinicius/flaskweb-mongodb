@@ -11,8 +11,6 @@ API REST simples em Flask que utiliza MongoDB como banco de dados. Este projeto 
 - Endpoints principais
 - Exemplos (curl)
 - Estrutura do projeto
-- Observações importantes
-- Como contribuir
 
 ## Visão geral
 - A aplicação cria a instância do Flask em `create_app()` (arquivo `app/__init__.py`) e conecta ao MongoDB usando `pymongo`.
