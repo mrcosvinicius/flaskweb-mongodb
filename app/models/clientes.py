@@ -61,3 +61,5 @@ class AtualizaCliente(BaseModel):
     telefone: Optional[str] = None
     endereco: Optional[str] = None
     saldo: Optional[float] = None
+
+    model_config = ConfigDict(populate_by_name=True, arbitrary_types_allowed=True)
